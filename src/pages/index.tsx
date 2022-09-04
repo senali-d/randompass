@@ -6,9 +6,14 @@ import { generatePassword } from '../utils/util'
 
 const Home: NextPage = () => {
   const [password, setPassword] = useState<string>('')
+  const [size, setSize] = useState<number>(8)
+  const [haveUppercase, setHaveUppercase] = useState<boolean>(true)
+  const [haveLowercase, setHaveLowercase] = useState<boolean>(false)
+  const [haveNumber, setHaveNumber] = useState<boolean>(true)
+  const [haveSymbol, setHaveSymbol] = useState<boolean>(true)
   
   useEffect(() => {
-    const pass = generatePassword()
+    const pass = generatePassword(size, haveUppercase, haveLowercase, haveNumber, haveSymbol)
     setPassword(pass)
   }, [])
 
