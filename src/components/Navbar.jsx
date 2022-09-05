@@ -7,7 +7,9 @@ const Navbar = () => {
       <div className="max-w-[1080px] container flex flex-wrap justify-between items-center mx-auto">
         <div className="flex items-center flex-1">
           <Link href="/">
-            <span className="self-center text-xl font-semibold whitespace-nowrap text-[#0063B2]">randompass</span>
+            <a className="self-center text-xl font-semibold whitespace-nowrap text-[#0063B2]">
+              randompass
+            </a>
           </Link>
         </div>
         <div className="flex md:order-2">
@@ -16,7 +18,9 @@ const Navbar = () => {
         <div>
           <ul className="flex flex-col md:flex-row md:space-x-8 md:text-sm md:font-medium">
           <li>
-            <Link href="https://github.com/senali-d/randompass" target="_blank" className="block py-2 pr-4 pl-3 text-[#0063B2] border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-[#0063B2cc] md:p-0"><AiOutlineGithub size="30" /></Link>
+            <Link href="https://github.com/senali-d/randompass" target="_blank" className="block py-2 pr-4 pl-3 text-[#0063B2] border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-[#0063B2cc] md:p-0">
+              <a target="_blank"><AiOutlineGithub size="30" /></a>
+            </Link>
           </li>
           </ul>
         </div>
