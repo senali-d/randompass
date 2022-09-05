@@ -6,7 +6,9 @@ function MyApp({ Component, pageProps }: AppProps) {
   return (
     <>
       <Navbar />
-      <Component {...pageProps} />
+      <div className="h-[100vh]" style={{ backgroundColor: "#9CC3D5" }}>
+        <Component {...pageProps} />
+      </div>
     </>
   )
 }

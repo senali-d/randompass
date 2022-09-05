@@ -27,8 +27,9 @@ const Home: NextPage = () => {
 
   const reloadNewPassword = () => {
     setIsClicked(true)
+    
     const pass = generatePassword(size, haveUppercase, haveLowercase, haveNumber, haveSymbol)
-    setPassword(pass)
+        setPassword(pass)
     setTimeout(() => {
       setIsClicked(false)
     }, 1000);
@@ -39,6 +40,30 @@ const Home: NextPage = () => {
     setTimeout(() => {
       setIsCopied(false);
     }, 1000);
+  }
+
+  const handleSwitch = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, checked } = e.target
+    switch(name) {
+      case "uppercase":
+        setHaveUppercase(checked)
+        setPassword(generatePassword(size, checked, haveLowercase, haveNumber, haveSymbol))
+        break
+      case "lowercase":
+        setHaveLowercase(checked)
+        setPassword(generatePassword(size, haveUppercase, checked, haveNumber, haveSymbol))
+        break
+      case "number":
+        setHaveNumber(checked)
+        setPassword(generatePassword(size, haveUppercase, haveLowercase, checked, haveSymbol))
+        break
+      case "symbol":
+        setHaveSymbol(checked)
+        setPassword(generatePassword(size, haveUppercase, haveLowercase, haveNumber, checked))
+        break
+      default:
+        break
+    }
   }
 
   return (
@@ -53,7 +78,7 @@ const Home: NextPage = () => {
         <div className="py-12 md:py-24">
           <div className="flex flex-col text-center w-full mb-5 md:mb-10">
             <div className="w-full max-w-sm mx-auto">
-              <div className="flex items-center border-b border-[#9CC3D5] py-2">
+              <div className="flex items-center border-b border-[#ffffff] py-2">
                 <input className="appearance-none bg-transparent border-none w-full text-gray-700 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" value={password} onChange={handleChange} aria-label="Password"/>
                 <button 
                   className={`flex-shrink-0 border-transparent border-4 text-[#0063B2] hover:text-[#0063B2cc] text-sm py-1 px-2 rounded ${isClicked && 'rotate-180 transition-transform'}`}
@@ -72,9 +97,46 @@ const Home: NextPage = () => {
                   </button>
                 </CopyToClipboard>
               </div>
+
+              <div className="mt-10 p-3 bg-indigo-50 w-full">
+                <p className="text-left pb-4">Settings</p>
+                
+                <div className="text-left my-2">
+                  <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                    <input type="checkbox" name="uppercase" id="uppercase" className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-[#9CC3D5] border-4 appearance-none cursor-pointer" checked={haveUppercase} onChange={handleSwitch}/>
+                    <label htmlFor="uppercase" className="toggle-label block overflow-hidden h-6 rounded-full bg-[#9CC3D5] cursor-pointer"></label>
+                  </div>
+                  <label htmlFor="uppercase" className="text-[15px] text-gray-700">Uppercase.</label>
+                </div>
+
+                <div className="text-left my-2">
+                  <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                    <input type="checkbox" name="lowercase" id="lowercase" className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-[#9CC3D5] border-4 appearance-none cursor-pointer" checked={haveLowercase} onChange={handleSwitch}/>
+                    <label htmlFor="lowercase" className="toggle-label block overflow-hidden h-6 rounded-full bg-[#9CC3D5] cursor-pointer"></label>
+                  </div>
+                  <label htmlFor="lowercase" className="text-[15px] text-gray-700">Lowercase.</label>
+                </div>
+
+                <div className="text-left my-2">
+                  <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                    <input type="checkbox" name="number" id="number" className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-[#9CC3D5] border-4 appearance-none cursor-pointer" checked={haveNumber} onChange={handleSwitch}/>
+                    <label htmlFor="number" className="toggle-label block overflow-hidden h-6 rounded-full bg-[#9CC3D5] cursor-pointer"></label>
+                  </div>
+                  <label htmlFor="number" className="text-[15px] text-gray-700">Number.</label>
+                </div>
+
+                <div className="text-left my-2">
+                  <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
+                    <input type="checkbox" name="symbol" id="symbol" className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-[#9CC3D5] border-4 appearance-none cursor-pointer" checked={haveSymbol} onChange={handleSwitch}/>
+                    <label htmlFor="symbol" className="toggle-label block overflow-hidden h-6 rounded-full bg-[#9CC3D5] cursor-pointer"></label>
+                  </div>
+                  <label htmlFor="symbol" className="text-[15px] text-gray-700">Symbol.</label>
+                </div>
+              </div>
             </div>
           </div>
         </div>
+
       </main>
     </div>
   )
