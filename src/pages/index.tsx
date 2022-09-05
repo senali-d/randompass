@@ -10,11 +10,11 @@ const Home: NextPage = () => {
   const [password, setPassword] = useState<string>('')
   const [size, setSize] = useState<number>(8)
   const [haveUppercase, setHaveUppercase] = useState<boolean>(true)
-  const [haveLowercase, setHaveLowercase] = useState<boolean>(false)
+  const [haveLowercase, setHaveLowercase] = useState<boolean>(true)
   const [haveNumber, setHaveNumber] = useState<boolean>(true)
   const [haveSymbol, setHaveSymbol] = useState<boolean>(true)
-  const [isCopied, setIsCopied] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
+  const [isCopied, setIsCopied] = useState(false)
+  const [isClicked, setIsClicked] = useState(false)
   
   useEffect(() => {
     const pass = generatePassword(size, haveUppercase, haveLowercase, haveNumber, haveSymbol)
@@ -22,7 +22,17 @@ const Home: NextPage = () => {
   }, [])
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value)
+    const { name, value } = e.target
+    switch (name) {
+      case "password":
+        setPassword(value)
+        break
+      case "passwordSize":
+        setSize(parseInt(value))
+        break
+      default:
+        break
+    }
   }
 
   const reloadNewPassword = () => {
@@ -77,9 +87,9 @@ const Home: NextPage = () => {
       <main className="px-4 md:px-0 mx-auto max-w-[1080px]">        
         <div className="py-12 md:py-24">
           <div className="flex flex-col text-center w-full mb-5 md:mb-10">
-            <div className="w-full max-w-sm mx-auto">
+            <div className="w-full max-w-md mx-auto">
               <div className="flex items-center border-b border-[#ffffff] py-2">
-                <input className="appearance-none bg-transparent border-none w-full text-gray-100 mr-3 py-1 px-2 leading-tight focus:outline-none" type="text" value={password} onChange={handleChange} aria-label="Password"/>
+                <input className="appearance-none bg-transparent border-none w-full text-gray-100 mr-3 py-1 px-2 leading-tight focus:outline-none" name="password" type="text" value={password} onChange={handleChange} aria-label="Password"/>
                 <button 
                   className={`flex-shrink-0 border-transparent border-4 text-sm py-1 px-2 rounded ${isClicked ? 'text-white hover:text-[#ffffffcc] rotate-180 transition-transform' : 'text-[#0063B2] hover:text-[#0063B2cc]'}`}
                   type="button"
@@ -100,7 +110,12 @@ const Home: NextPage = () => {
 
               <div className="mt-10 p-3 bg-indigo-50 w-full">
                 <p className="text-left pb-4">Settings</p>
-                
+
+                <div className="mb-5">
+                  <label htmlFor="steps-range" className="flex mb-1 text-sm font-medium text-gray-700">Password Length: {size}</label>
+                  <input id="steps-range" name="passwordSize" type="range" min="8" max="32" value={size} step="2" onChange={handleChange} className="w-full h-2 bg-gray-300 rounded-lg appearance-none cursor-pointer" />
+                </div>
+
                 <div className="text-left my-2">
                   <div className="relative inline-block w-10 mr-2 align-middle select-none transition duration-200 ease-in">
                     <input type="checkbox" name="uppercase" id="uppercase" className="toggle-checkbox absolute block w-6 h-6 rounded-full bg-[#9CC3D5] border-4 appearance-none cursor-pointer" checked={haveUppercase} onChange={handleSwitch}/>
