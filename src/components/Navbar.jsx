@@ -15,7 +15,7 @@ const Navbar = () => {
         <div>
           <ul className="flex flex-col md:flex-row md:space-x-8 md:text-sm md:font-medium">
           <li>
-            <a href="https://github.com/senali-d/codechallenges" target="_blank" className="block py-2 pr-4 pl-3 text-[#0063B2] border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-[#0063B2cc] md:p-0"><AiOutlineGithub size="30" /></a>
+            <a href="https://github.com/senali-d/randompass" target="_blank" className="block py-2 pr-4 pl-3 text-[#0063B2] border-b border-gray-100 hover:bg-gray-50 md:hover:bg-transparent md:border-0 md:hover:text-[#0063B2cc] md:p-0"><AiOutlineGithub size="30" /></a>
           </li>
           </ul>
         </div>
